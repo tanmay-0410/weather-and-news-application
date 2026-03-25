@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast | Weather & News Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/" style="text-decoration: none; color: inherit; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fa-solid fa-cloud-sun-rain"></i>
+                <span>Weather & News Hub</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/weather" class="active">Weather</a></li>
+            <li><a href="/news">News</a></li>
+        </ul>
+    </nav>
+
+    <main class="weather-container">
+        <div class="search-box slide-down">
+            <h1>Check Local Weather</h1>
+            <p>Enter a city name to get real-time weather updates.</p>
+            <div class="input-group">
+                <i class="fa-solid fa-location-dot location-icon"></i>
+                <input type="text" id="city-input" placeholder="e.g., London, Tokyo, New York" autocomplete="off">
+                <button id="search-weather-btn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </div>
+        </div>
+
+        <!-- Feedback & Loading -->
+        <div id="weather-loader" class="loader hidden"></div>
+        <div id="weather-error" class="error-message hidden"></div>
+
+        <!-- Weather Display Card -->
+        <div id="weather-result" class="weather-card hidden fade-in">
+            <div class="weather-header">
+                <h2 id="w-city">City Name</h2>
+                <p id="w-desc">Condition Description</p>
+            </div>
+            
+            <div class="weather-main">
+                <div class="w-icon-box">
+                    <img id="w-icon" src="" alt="Weather Icon">
+                </div>
+                <!-- Adding unit toggle logic visually or just C -->
+                <div class="w-temp">
+                    <span id="w-temp-val">--</span>°C
+                </div>
+            </div>
+
+            <div class="weather-details">
+                <div class="detail-item">
+                    <i class="fa-solid fa-droplet"></i>
+                    <div>
+                        <span class="detail-label">Humidity</span>
+                        <span id="w-humidity" class="detail-value">--%</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-wind"></i>
+                    <div>
+                        <span class="detail-label">Wind Speed</span>
+                        <span id="w-wind" class="detail-value">-- m/s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Load default city on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof fetchWeather === 'function') {
+                document.getElementById('city-input').value = 'London';
+                fetchWeather('London');
+            }
+        });
+    </script>
+</body>
+</html>

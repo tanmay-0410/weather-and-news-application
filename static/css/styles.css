@@ -1,0 +1,434 @@
+/* =========================================================================
+   Weather & Regional News App Styles
+   Primary: #FF7A18
+   Secondary: #FFD200
+   Background: #FFF8F0
+   Text: #2C2C2C
+   Font: Outfit
+   ========================================================================= */
+
+:root {
+    --primary-color: #FF7A18;
+    --primary-hover: #e06810;
+    --secondary-color: #FFD200;
+    --bg-color: #FFF8F0;
+    --card-bg: #FFFFFF;
+    --text-color: #2C2C2C;
+    --text-muted: #6B7280;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================================================
+   Typography & Utilities
+   ========================================================================= */
+
+h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.5rem; }
+h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+p { font-size: 1rem; color: var(--text-muted); }
+
+.hidden { display: none !important; }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-normal);
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #ff5e3a);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 122, 24, 0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 122, 24, 0.4);
+}
+.btn-secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+.btn-secondary:hover {
+    background: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+/* =========================================================================
+   Animations
+   ========================================================================= */
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.fade-in { animation: fadeIn 0.6s ease-out forwards; }
+.slide-up { animation: slideUp 0.6s ease-out forwards; }
+.slide-down { animation: slideDown 0.6s ease-out forwards; }
+
+/* =========================================================================
+   Navigation
+   ========================================================================= */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background-color: transparent;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.logo i { font-size: 1.75rem; color: var(--secondary-color); }
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+.nav-links a.active, .nav-links a:hover { color: var(--primary-color); }
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width var(--transition-normal);
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* =========================================================================
+   Landing Page (index.html)
+   ========================================================================= */
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: calc(100vh - 80px); /* Minus navbar approx height */
+    padding: 2rem 5%;
+    position: relative;
+}
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+}
+.hero-content h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero-content p { font-size: 1.25rem; margin-bottom: 2.5rem; }
+.cta-buttons { display: flex; gap: 1rem; }
+
+.hero-art {
+    flex: 1;
+    position: relative;
+    height: 500px;
+    z-index: 1;
+}
+.abstract-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: -1;
+    animation: pulse 6s infinite ease-in-out;
+}
+.shape-1 {
+    width: 300px; height: 300px;
+    background: rgba(255, 122, 24, 0.4); /* Primary */
+    top: 20%; left: 10%;
+}
+.shape-2 {
+    width: 200px; height: 200px;
+    background: rgba(255, 210, 0, 0.4); /* Secondary */
+    bottom: 20%; right: 10%;
+    animation-delay: 1s;
+}
+.shape-3 {
+    width: 250px; height: 250px;
+    background: rgba(255, 122, 24, 0.2);
+    top: 50%; left: 40%;
+    animation-delay: 2s;
+}
+
+/* =========================================================================
+   Weather Page Elements
+   ========================================================================= */
+
+.weather-container, .news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-box {
+    text-align: center;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 600px;
+}
+.input-group {
+    display: flex;
+    margin-top: 1.5rem;
+    position: relative;
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    background: white;
+    padding: 0.25rem;
+}
+.location-icon {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 1.25rem;
+}
+.input-group input, .input-group select {
+    flex: 1;
+    border: none;
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    outline: none;
+    background: transparent;
+    color: var(--text-color);
+}
+.input-group select {
+    cursor: pointer;
+    appearance: none; /* Hide default arrow */
+}
+
+/* Custom Select styling specifically for News Page */
+.custom-select {
+    padding-right: 2rem;
+}
+
+/* Weather Card styling */
+.weather-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.weather-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+.weather-header { margin-bottom: 2rem; }
+.weather-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.w-icon-box {
+    background: var(--bg-color);
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.05);
+}
+.w-icon-box img { width: 80px; height: 80px; }
+.w-temp {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    display: flex;
+}
+.weather-details {
+    display: flex;
+    justify-content: space-around;
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 16px;
+}
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+.detail-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+.detail-label { display: block; font-size: 0.85rem; color: var(--text-muted); }
+.detail-value { display: block; font-weight: 600; font-size: 1.1rem; }
+
+/* =========================================================================
+   News Page Elements
+   ========================================================================= */
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    padding-bottom: 4rem;
+}
+.news-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+.news-image {
+    width: 100%;
+    height: 200px;
+    background-color: #eee;
+    overflow: hidden;
+}
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.news-card:hover .news-image img { transform: scale(1.05); }
+.news-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.news-source {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+.news-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    /* limit to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.news-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex: 1;
+    /* limit to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+}
+.read-more:hover { gap: 0.75rem; text-decoration: underline; }
+
+/* =========================================================================
+   Loaders & Helpers
+   ========================================================================= */
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 122, 24, 0.2);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+.error-message {
+    background: #fee2e2;
+    color: #ef4444;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* =========================================================================
+   Responsive Design
+   ========================================================================= */
+
+@media (max-width: 768px) {
+    .nav-links { gap: 1rem; font-size: 0.9rem; }
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 4rem;
+    }
+    .hero-content h1 { font-size: 2.75rem; }
+    .hero-content p { font-size: 1.1rem; }
+    .cta-buttons { justify-content: center; flex-wrap: wrap; }
+    .hero-art { display: none; /* Hide decorative background on mobile for clarity */ }
+    
+    .weather-card { padding: 2rem 1.5rem; }
+    .w-temp { font-size: 3.5rem; }
+}

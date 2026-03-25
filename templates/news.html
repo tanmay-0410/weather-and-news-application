@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regional News | Weather & News Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/" style="text-decoration: none; color: inherit; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fa-solid fa-cloud-sun-rain"></i>
+                <span>Weather & News Hub</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/weather">Weather</a></li>
+            <li><a href="/news" class="active">News</a></li>
+        </ul>
+    </nav>
+
+    <main class="news-container">
+        <div class="search-box slide-down">
+            <h1>Latest Regional News</h1>
+            <p>Select a country to browse the top headlines.</p>
+            <div class="input-group">
+                <i class="fa-solid fa-earth-americas location-icon"></i>
+                <select id="country-select" class="custom-select">
+                    <option value="us" selected>United States</option>
+                    <option value="gb">United Kingdom</option>
+                    <option value="in">India</option>
+                    <option value="ca">Canada</option>
+                    <option value="au">Australia</option>
+                    <option value="jp">Japan</option>
+                    <option value="fr">France</option>
+                    <option value="de">Germany</option>
+                </select>
+                <button id="search-news-btn" class="btn btn-primary"><i class="fa-regular fa-newspaper"></i> Get News</button>
+            </div>
+        </div>
+
+        <!-- Feedback & Loading -->
+        <div id="news-loader" class="loader hidden"></div>
+        <div id="news-error" class="error-message hidden"></div>
+
+        <!-- News Grid -->
+        <div id="news-grid" class="news-grid hidden">
+            <!-- News cards will be injected here by JS -->
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Load default news on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof fetchNews === 'function') {
+                const defaultCountry = document.getElementById('country-select').value;
+                fetchNews(defaultCountry);
+            }
+        });
+    </script>
+</body>
+</html>

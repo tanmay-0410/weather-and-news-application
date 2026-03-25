@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather & News Hub</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-cloud-sun-rain"></i>
+            <span>Weather & News Hub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/weather">Weather</a></li>
+            <li><a href="/news">News</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero-section">
+        <div class="hero-content fade-in">
+            <h1>Stay Updated. Every Day.</h1>
+            <p>Your beautiful, warm hub for real-time weather forecasts and the latest regional news.</p>
+            <div class="cta-buttons">
+                <a href="/weather" class="btn btn-primary"><i class="fa-solid fa-cloud"></i> Check Weather</a>
+                <a href="/news" class="btn btn-secondary"><i class="fa-regular fa-newspaper"></i> View News</a>
+            </div>
+        </div>
+        <div class="hero-art slide-up">
+            <div class="abstract-shape shape-1"></div>
+            <div class="abstract-shape shape-2"></div>
+            <div class="abstract-shape shape-3"></div>
+            <!-- Interactive visual elements that make it feel alive -->
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
